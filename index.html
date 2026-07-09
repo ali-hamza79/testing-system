@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFNS Electromagnetism Examination Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="global-header">
+    <div class="logo-area">
+      <div class="crest-icon">⚡</div>
+      <div>
+        <h1>EXAMINATION PORTAL</h1>
+        <p class="subtitle">Academic Test Evaluation System</p>
+      </div>
+    </div>
+    <div class="header-controls">
+      <button id="theme-toggle" class="btn btn-secondary btn-sm" title="Toggle Theme">🌓 Toggle Mode</button>
+      <button id="fullscreen-toggle" class="btn btn-secondary btn-sm" title="Toggle Fullscreen">📺 Fullscreen</button>
+    </div>
+  </header>
+  <main class="container">
+    <section id="login-view" class="view-card active">
+      <div class="card-header border-accent">
+        <h2>CANDIDATE AUTHENTICATION</h2>
+        <p>Please enter your official registration credentials to access the examination dashboard.</p>
+      </div>
+      <form id="login-form" class="auth-form">
+        
+        <div class="form-group">
+          <label for="candidate-name">Full Candidate Name</label>
+          <input type="text" id="candidate-name" placeholder="Enter Your Name" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="portal-password">Access Password</label>
+          <input type="password" id="portal-password" placeholder="Enter the password" required autocomplete="off">
+        </div>
+        <div class="form-instructions">
+          <p><strong>System Note:</strong> This application runs securely inside your local sandbox environments. All exam progress, Data points, anti-cheat scores, and statistical calculations will be saved.</p>
+        </div>
+        
+        <div class="support-action-row">
+          <p class="support-text text-muted">Don't have your registration credentials?</p>
+          <a href="https://wa.me/923264519629?text=Hello%20Support%20Team%2C%20I%20need%20assistance%20retrieving%20my%20examination%20portal%20credentials." 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="btn btn-secondary btn-block support-whatsapp-btn">
+             💬 Contact the Provider Here
+          </a>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">AUTHENTICATE & ENTER PORTAL</button>
+      </form>
+    </section>
+    <section id="dashboard-view" class="view-card">
+      <div class="dashboard-top-bar">
+        <div class="candidate-badge">
+          <div class="avatar">🎖️</div>
+          <div>
+            <h2 id="dash-candidate-name">Welcome, Candidate</h2>
+            <p id="dash-reg-number" class="text-muted">REG: Pending</p>
+          </div>
+        </div>
+        <button id="logout-btn" class="btn btn-danger">SECURE LOGOUT</button>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Total Attempts</span>
+          <span id="stat-attempts" class="stat-value">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Highest Score</span>
+          <span id="stat-high" class="stat-value">0%</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Average Score</span>
+          <span id="stat-avg" class="stat-value">0%</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Latest Evaluation</span>
+          <span id="stat-grade" class="stat-value">—</span>
+        </div>
+      </div>
+      <div class="dashboard-layout">
+        <div class="dashboard-main-col">
+          <div class="panel">
+            <h3>Performance Analysis Engine</h3>
+            <div class="charts-container">
+              <div class="canvas-wrapper">
+                <h4>Historical Scoring Curve</h4>
+                <canvas id="line-chart" width="320" height="200"></canvas>
+              </div>
+              <div class="canvas-wrapper">
+                <h4>Response Categories (Latest Attempt)</h4>
+                <canvas id="pie-chart" width="320" height="200"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="panel margin-top">
+            <h3>Archived Examination Attempts</h3>
+            <div class="table-scroll">
+              <table id="attempts-table">
+                <thead>
+                  <tr>
+                    <th>Attempt No.</th>
+                    <th>Score (%)</th>
+                    <th>Correct</th>
+                    <th>Wrong</th>
+                    <th>Skipped</th>
+                    <th>Duration</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard-side-col">
+          <div class="panel action-panel text-center">
+            <h3>Subject Core Assessment</h3>
+            <p class="exam-title-badge">AFNS Electromagnetism & Induction</p>
+            <div class="exam-parameters">
+              <div>📋 <strong id="ui-mcq-count">Loading MCQs...</strong></div>
+              <div>⏱️ <strong id="ui-timer-count">Loading Duration...</strong></div>
+              <div>🔒 <strong>...</strong></div>
+            </div>
+            <button id="start-exam-btn" class="btn btn-success btn-block btn-lg">LAUNCH TESTING CYCLE</button>
+          </div>
+          <div class="panel margin-top">
+            <h3>Real-Time Activity Telemetry</h3>
+            <div id="activity-log" class="log-stream">
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="quiz-view" class="view-card no-padding">
+      <div class="quiz-sticky-header">
+        <div class="quiz-title-meta">
+          <span class="badge badge-accent">EXAM IN PROGRESS</span>
+          <h3>Electromagnetism Mastery Verification</h3>
+        </div>
+        <div class="quiz-timer-meta">
+          <span class="timer-label">TIME REMAINING:</span>
+          <span id="quiz-timer">--:--</span>
+        </div>
+      </div>
+      <div class="progress-bar-container">
+        <div id="quiz-progress" class="progress-fill" style="width: 0%;"></div>
+      </div>
+      <div class="quiz-body-layout">
+        <div class="quiz-content-area">
+          <div class="question-header">
+            <span id="question-index-counter" class="question-counter">Question 1 of ...</span>
+            <div id="cheat-warning-indicator" class="alert alert-warning hidden"></div>
+          </div>
+          <div id="question-text" class="question-prompt-text">
+            Loading evaluation parameters...
+          </div>
+          <div id="options-container" class="options-grid-list">
+            </div>
+          <div class="quiz-navigation-controls">
+            <button id="prev-btn" class="btn btn-secondary">⬅️ Previous Question</button>
+            <button id="next-btn" class="btn btn-secondary">Next Question ➡️</button>
+            <button id="submit-exam-btn" class="btn btn-danger btn-large">📥 SUBMIT EXAM FOR SCORING</button>
+          </div>
+        </div>
+        <div class="quiz-sidebar-navigator">
+          <h4>Navigation Control Matrix</h4>
+          <p class="matrix-hint">Click any number block to skip straight to that question record.</p>
+          <div id="matrix-grid" class="matrix-numbers-grid">
+            </div>
+          <div class="matrix-legend">
+            <div class="legend-item"><span class="legend-box current"></span> Current</div>
+            <div class="legend-item"><span class="legend-box answered"></span> Selected</div>
+            <div class="legend-item"><span class="legend-box unanswered"></span> Empty</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="review-view" class="view-card no-padding">
+      <div class="quiz-sticky-header review-header">
+        <div class="quiz-title-meta">
+          <span class="badge badge-success">POST-EXAM ANALYSIS MODE</span>
+          <h3>Performance Answer Verification Matrix</h3>
+        </div>
+        <button id="exit-review-btn" class="btn btn-primary">Return to Dashboard</button>
+      </div>
+      <div class="quiz-body-layout">
+        <div class="quiz-content-area">
+          <div class="question-header">
+            <span id="review-index-counter" class="question-counter">Question 1 of ...</span>
+            <span id="review-verdict-badge" class="badge">CORRECT</span>
+          </div>
+          <div id="review-question-text" class="question-prompt-text">
+            Loading evaluation parameters...
+          </div>
+          <div id="review-options-container" class="options-grid-list disabled-state">
+            </div>
+          <div class="quiz-navigation-controls">
+            <button id="review-prev-btn" class="btn btn-secondary">⬅️ Previous Item</button>
+            <button id="review-next-btn" class="btn btn-secondary">Next Item ➡️</button>
+          </div>
+        </div>
+        <div class="quiz-sidebar-navigator">
+          <h4>Review Evaluation Matrix</h4>
+          <p class="matrix-hint">Color-coded scoring breakdown. Select numbers directly to audit specific parameters.</p>
+          <div id="review-matrix-grid" class="matrix-numbers-grid">
+            </div>
+          <div class="matrix-legend">
+            <div class="legend-item"><span class="legend-box review-correct"></span> Correct</div>
+            <div class="legend-item"><span class="legend-box review-wrong"></span> Incorrect</div>
+            <div class="legend-item"><span class="legend-box review-skipped"></span> Skipped</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="global-footer">
+    <p>© 2026 AFNS Academic Evaluation Framework. All operations and memory elements are securely contained inside standard localized data pools.</p>
+  </footer>
+  <script src="questions.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
