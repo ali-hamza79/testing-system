@@ -1,4 +1,3 @@
----
 ## OPERATIONAL FEATURE DEEP DIVE
 ### 1. Unified Telemetry Logging Sequence
 The application features a real-time event recorder that tracks user interactions chronologically. Each candidate registration profile retains its own independent event stack, preserving entries across session state alterations:
